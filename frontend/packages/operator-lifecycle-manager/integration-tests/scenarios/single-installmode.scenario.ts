@@ -42,6 +42,7 @@ describe('Interacting with a `OwnNamespace` install mode Operator (Prometheus)',
       (function checkForPackages() {
         const output = execSync(
           `kubectl get packagemanifests -n ${testName} --selector=catalog=console-e2e -o json`,
+          { maxBuffer: 500 * 1024 * 1024 },
         );
         if (
           JSON.parse(output.toString('utf-8')).items.find(
